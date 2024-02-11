@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll('.drum')
 
+// - - - - - - - - Button click "drum" action
 
 buttons.forEach(button => {
 
@@ -7,26 +8,32 @@ buttons.forEach(button => {
 		const buttonInnerHtml = button.innerHTML
 		makeSound(buttonInnerHtml)
 
-		button.classList.add('active');
-
-		setTimeout(() => {
-			button.classList.remove('active');
-		}, 250);
+		buttonPress(button)
 	})
 });
+
+
+// - - - - - - - - Keydown "drum" action
 
 document.addEventListener('keydown', (e) => {
 	makeSound(e.key)
 	const pressedButton = document.querySelector(`.${e.key}.drum`)
 
-	if (pressedButton) {
-		pressedButton.classList.add('active');
-
-		setTimeout(() => {
-			pressedButton.classList.remove('active');
-		}, 250);
-	}
+	pressedButton ? buttonPress(pressedButton) : ''
 })
+
+
+// - - - - - - - - Tiles animation
+
+function buttonPress(button) {
+	button.classList.add('active');
+
+	setTimeout(() => {
+		button.classList.remove('active');
+	}, 250);
+}
+
+// - - - - - - - - Keydown / click examination
 
 function makeSound(key) {
 	switch (key) {
